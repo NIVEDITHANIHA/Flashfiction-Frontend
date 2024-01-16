@@ -1,3 +1,3 @@
-const baseurl = "http://localhost:4000"
+const baseurl = "https://flashfiction-server.onrender.com"
 
 export default baseurl;
