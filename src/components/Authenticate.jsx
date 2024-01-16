@@ -10,7 +10,7 @@ import { isAuthShareContext } from '../context/Contextshared';
 
 
 const Authenticate = ({ register }) => {
-    const { isAuthContext , setisAuthContext } = useContext(isAuthShareContext)
+    const { isAuthContext, setisAuthContext } = useContext(isAuthShareContext)
 
     console.log(register);
 
@@ -76,7 +76,7 @@ const Authenticate = ({ register }) => {
     return (
         <>
             <div className='d-flex align-items-center justify-content-center w-100 mt-5 p-5' style={{ height: "100%" }}>
-                <Navbar className=" container  w-50 mt-5 d-flex align-items-center justify-content-center" style={{ height: "50%" }}>
+                <Navbar className="w-75 mt-5 d-flex align-items-center justify-content-center" style={{ height: "50%" }}>
                     <Row className='w-100'>
                         <Col md={6} lg={6} sm={12}>
                             {register ? <div>

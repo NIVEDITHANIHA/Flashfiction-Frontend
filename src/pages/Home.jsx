@@ -6,7 +6,6 @@ import Footer from '../components/Footer';
 import Header from "../components/Header"
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button'
 const Home = () => {
     const [getToken, setGetToken] = useState("")
     useEffect(() => {
@@ -38,9 +37,9 @@ const Home = () => {
                     </Col>
 
 
-                    <Col className='w-100'>
+                    <Col className='d-flex justify-content-center align-items-center w-100'>
 
-                        <img src="https://i.giphy.com/dZnAEgiyCwFJay2Knu.webp" alt="Noimage" height={'100%'} width={"70%"} className='img-fluid' />
+                        <img src="https://i.giphy.com/dZnAEgiyCwFJay2Knu.webp" alt="Noimage" height={'100%'} width={"100%"} className='img-fluid' />
                         {/* <img src="https://cdn-images-1.medium.com/max/1200/1*2phwm-Wj_22avHjtB8PkEg.jpeg" alt="" /> */}
                     </Col>
                 </Row>
