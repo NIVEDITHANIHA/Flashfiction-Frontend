@@ -29,8 +29,8 @@ const Home = () => {
                             <p className='fs-1'>Unleash your creativity with the enchanting <i class="fa-solid fa-pen-to-square fa-3 text-danger"></i> pen-and-paper nostalgia on our Flash Fiction.</p>
 
                             {getToken ?
-                                <button type='submit' className='btn btn-dark ' > Explore Your boundless imagination! <Link to={"/dashboard"}><i class="fa-solid fa-pen text-danger"></i></Link></button>
-                                : <button type='submit' className='btn btn-dark ' > Explore Your boundless imagination! <Link to={"/login"}><i class="fa-solid fa-pen text-danger"></i></Link></button>
+                               <Link to={"/dashboard"}> <button type='submit' className='btn btn-dark ' > Explore Your boundless imagination! <i class="fa-solid fa-pen text-danger"></i></button></Link>
+                                : <Link to={"/login"}><button type='submit' className='btn btn-dark ' > Explore Your boundless imagination! <i class="fa-solid fa-pen text-danger"></i></button></Link>
                             }
                         </div>
 
@@ -46,12 +46,12 @@ const Home = () => {
             </div>
 
 
-            <div className='container m-5' style={{ height: "100vh" }}>
+            <div className='container m-5 d-flex  flex-column align-items-center justify-content-center w-100 fs-3 mb-5' style={{ height: "100vh" }}>
 
 
-                <div className='d-flex align-items-center justify-content-center w-100 fs-3 mb-5'>
-                    Where beautiful books are made
-                </div>
+              
+                  <h1 className='d-flex align-items-center justify-content-center w-100 fs-1 mb-5 p-5'>  How beautiful Fictions are made</h1>
+              
 
 
                 <Row>

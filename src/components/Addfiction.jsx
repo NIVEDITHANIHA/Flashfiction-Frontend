@@ -6,7 +6,13 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { flashStoriesApi } from '../service/allapi';
 import { createShareContext } from '../context/Contextshared';
+import { Watch } from 'react-loader-spinner'
+
 const Addfiction = () => {
+    const [loading, setLoading] = useState(false)
+
+
+
     const { createContext, setCreateContext } = useContext(createShareContext)
     const [show, setShow] = useState(false);
 
@@ -21,11 +27,16 @@ const Addfiction = () => {
     }, [])
 
     console.log(token);
+
     const handleSubmit = async () => {
+        setLoading(true)
         setShow(false);
         const { fictionTitle, fictionDate, fictionContent, fictionImage, } = fictions
         if (!fictionTitle || !fictionDate || !fictionContent || !fictionImage) {
             toast.info("fill the Forms")
+            setTimeout(() => {
+                setLoading(false)
+            }, 2000)
         } else {
             const reqbody = new FormData();
             reqbody.append("fictionTitle", fictionTitle)
@@ -45,8 +56,14 @@ const Addfiction = () => {
                 console.log(results);
                 setCreateContext(results.data)
                 if (results.status === 200) {
+                    setTimeout(() => {
+                        setLoading(false)
+                    }, 2000)
                     toast.success("FlashStory Created")
                 } else {
+                    setTimeout(() => {
+                        setLoading(false)
+                    }, 2000)
                     toast.error(results.request.response)
                 }
 
@@ -94,30 +111,42 @@ const Addfiction = () => {
             </div>
 
 
-            <Modal show={show} onHide={handleClose} className='w-100'>
-                <Modal.Header closeButton>
-                    <Modal.Title>Flash FIction</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className='d-flex flex-column  align-items-center justify-content-center w-100'>
-                    <label htmlFor="flashfiction">
-                        <img className='img-fluid mb-2 rounded' src={previews ? previews : "https://images.freecreatives.com/wp-content/uploads/2017/01/Camera-Outline-Clip-Art.jpg"} alt="" height={"10%"} width={"50%"} />
+            {loading ? <div className='d-flex align-items-center justify-content-center w-100' style={{ height: "100%" }}>
+                <Watch
+                    visible={true}
+                    height="500"
+                    width="80"
+                    radius="48"
+                    color="black"
+                    ariaLabel="watch-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                />
+            </div>
+                : <Modal show={show} onHide={handleClose} className='w-100'>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Flash FIction</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className='d-flex flex-column  align-items-center justify-content-center w-100'>
+                        <label htmlFor="flashfiction">
+                            <img className='img-fluid mb-2 rounded' src={previews ? previews : "https://images.freecreatives.com/wp-content/uploads/2017/01/Camera-Outline-Clip-Art.jpg"} alt="" height={"10%"} width={"50%"} />
 
-                        <input type="file" id='flashfiction' style={{ display: "none" }} onChange={(e) => setFictions({ ...fictions, fictionImage: e.target.files[0] })} />
-                    </label>
+                            <input type="file" id='flashfiction' style={{ display: "none" }} onChange={(e) => setFictions({ ...fictions, fictionImage: e.target.files[0] })} />
+                        </label>
 
-                    <input type="text" className='form-control mb-3' placeholder='Story Title' value={fictions.fictionTitle} onChange={(e) => setFictions({ ...fictions, fictionTitle: e.target.value })} />
-                    <input type="date" className='form-control mb-3' placeholder='Date' value={fictions.fictionDate} onChange={(e) => setFictions({ ...fictions, fictionDate: e.target.value })} />
-                    <textarea cols="160" rows="8" className='form-control' placeholder=' ........... Fiction begins' value={fictions.fictionContent} onChange={(e) => setFictions({ ...fictions, fictionContent: e.target.value })}></textarea>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleSubmit}>
-                        Save
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+                        <input type="text" className='form-control mb-3' placeholder='Story Title' value={fictions.fictionTitle} onChange={(e) => setFictions({ ...fictions, fictionTitle: e.target.value })} />
+                        <input type="date" className='form-control mb-3' placeholder='Date' value={fictions.fictionDate} onChange={(e) => setFictions({ ...fictions, fictionDate: e.target.value })} />
+                        <textarea cols="160" rows="8" className='form-control' placeholder=' ........... Fiction begins' value={fictions.fictionContent} onChange={(e) => setFictions({ ...fictions, fictionContent: e.target.value })}></textarea>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={handleSubmit}>
+                            Save
+                        </Button>
+                    </Modal.Footer>
+                </Modal>}
 
             <ToastContainer autoClose={2000} position={"top-center"} />
         </>
